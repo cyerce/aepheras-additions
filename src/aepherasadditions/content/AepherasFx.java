@@ -9,6 +9,9 @@ import arc.math.Interp;
 import arc.math.Mathf;
 import arc.math.Rand;
 import arc.math.geom.Vec2;
+import mindustry.content.Fx;
+import mindustry.content.Liquids;
+import mindustry.content.StatusEffects;
 import mindustry.entities.Effect;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Pal;
@@ -163,6 +166,20 @@ public class AepherasFx {
                 Lines.lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), 1.0F + out * 4.0F * (4.0F + intensity));
                 Drawf.light(e.x + x, e.y + y, out * 4.0F * (3.0F + intensity) * 3.5F, Draw.getColor(), 0.8F);
             });
+        });
+    });
+
+    public static final Effect irradiated = new Effect(35.0F, (e) -> {
+        Draw.color(Pal.thoriumPink, Color.white, e.fin());
+        Angles.randLenVectors((long)e.id, 3, 2.0F + e.fin() * 7.0F, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.1F + e.fout() * 1.4F);
+        });
+    });
+
+    public static final Effect meltingAcid = new Effect(40.0F, (e) -> {
+        Draw.color(Color.valueOf("ffee6b"), Color.valueOf("fff6b0"), e.fout() / 5.0F + Mathf.randomSeedRange((long)e.id, 0.12F));
+        Angles.randLenVectors((long)e.id, 2, 1.0F + e.fin() * 3.0F, (x, y) -> {
+            Fill.circle(e.x + x, e.y + y, 0.2F + e.fout() * 1.2F);
         });
     });
 }

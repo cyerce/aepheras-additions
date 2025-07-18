@@ -1,21 +1,19 @@
 package aepherasadditions.content;
 
+import aepherasadditions.content.custom.*;
 import aepherasadditions.world.draw.DrawVenusPlasma;
 import arc.graphics.Color;
+import arc.struct.Seq;
 import mindustry.Vars;
-import mindustry.content.Fx;
-import mindustry.content.Items;
-import mindustry.content.Liquids;
-import mindustry.content.StatusEffects;
-import mindustry.entities.bullet.ArtilleryBulletType;
-import mindustry.entities.bullet.BasicBulletType;
-import mindustry.entities.bullet.BulletType;
-import mindustry.entities.bullet.LightningBulletType;
+import mindustry.content.*;
+import mindustry.entities.bullet.*;
 import mindustry.entities.effect.MultiEffect;
+import mindustry.entities.part.RegionPart;
+import mindustry.entities.pattern.ShootAlternate;
 import mindustry.gen.Sounds;
+import mindustry.graphics.CacheLayer;
 import mindustry.graphics.Pal;
 import mindustry.type.Category;
-import mindustry.type.Item;
 import mindustry.type.ItemStack;
 import mindustry.type.LiquidStack;
 import mindustry.world.Block;
@@ -23,7 +21,12 @@ import mindustry.world.blocks.ConstructBlock;
 import mindustry.world.blocks.defense.*;
 import mindustry.world.blocks.defense.turrets.ItemTurret;
 import mindustry.world.blocks.defense.turrets.PowerTurret;
+import mindustry.world.blocks.distribution.MassDriver;
 import mindustry.world.blocks.distribution.StackConveyor;
+import mindustry.world.blocks.environment.*;
+import mindustry.world.blocks.liquid.ArmoredConduit;
+import mindustry.world.blocks.liquid.Conduit;
+import mindustry.world.blocks.liquid.LiquidRouter;
 import mindustry.world.blocks.payloads.PayloadConveyor;
 import mindustry.world.blocks.payloads.PayloadRouter;
 import mindustry.world.blocks.power.ImpactReactor;
@@ -31,10 +34,10 @@ import mindustry.world.blocks.power.PowerNode;
 import mindustry.world.blocks.production.*;
 import mindustry.world.blocks.storage.CoreBlock;
 import mindustry.world.blocks.storage.StorageBlock;
+import mindustry.world.blocks.units.RepairTurret;
 import mindustry.world.draw.*;
 import mindustry.world.meta.Attribute;
-import mindustry.world.meta.Env;
-import org.w3c.dom.Attr;
+import mindustry.world.meta.BuildVisibility;
 
 import static mindustry.type.ItemStack.with;
 
@@ -43,6 +46,11 @@ public class AepherasBlocks {
     public static Block
 
             //environment
+
+            //environment - erekir
+
+            //environement - cyneris
+            oreAluminum, oreFerrite, oreChromium, oreSulfur, oreVanadium, oreCobalt, rubyCluster, sapphireCluster, amethystCluster, emeraldCluster, citrineCluster, quartzCluster, roseQuartzCluster, rubyFloor, sapphireFloor, amethystFloor, emeraldFloor, citrineFloor, quartzFloor, roseQuartzFloor, rubyWall, sapphireWall, amethystWall, emeraldWall, citrineWall, quartzWall, roseQuartzWall, scoria, scoriaWall, obsidian, obsidianWall, caveWater, mycelium, myceliumWall, mushroomFloor, glowingMushroom, glowingMushroomLarge, mushroomWall, cauradine, cauricStone, cauricWall,
 
             //boulders
 
@@ -53,7 +61,8 @@ public class AepherasBlocks {
             //crafting
             advancedPlastaniumCompressor, blastCatalyzer, cokingBlaster, cokingOven, cryofluidCatalyzer, graphiteBlaster, metaglassBlaster, metaglassCrucible, multiCentrifuge, nuclearCatalyzer, nuclearMixer, phaseLoom, pyratiteCatalyzer, sifter, siliconKiln, sporeMultipress, surgeSmeltery, titanCrucible, titanSmelter, voltaliteCatalyzer, voltaliteMixer,
 
-            //crafting-erekir
+            //crafting- Cyneris
+            carbyteCondensor, sapphireCrystallizer, grapheneSynthesizer,
 
             //sandbox
 
@@ -67,42 +76,61 @@ public class AepherasBlocks {
             overdriver, mendDome, mendArray, overdriveArray, forceDome,
 
             //defense - erekir
+            radarLarge,
 
             //campaign only
 
             //transport
             titansteelConveyor,
 
-            //transport - alternate
+            //transport - Cyneris
+            pulseDriver, strataDriver, primeDriver,
 
             //liquid
 
-            //liquid - reinforced
+            //liquid - Cyneris
+            insulatedConduit, primeConduit, shieldedConduit, liquidCapsule, liquidCell, liquidReservoir, insulatedLiquidRouter, insulatedLiquidJunction, insulatedLiquidBridge,
 
             //power
             advancedPowerNode, voltaliteReactor, nuclearReactor, venusReactor,
 
-            //power - erekir
+            //power - Cyneris
+            linkNode, linkNodeLarge,
 
             //production
-            hydrator, mycoformer,
+            impulseDrill, hydrator, mycoformer,
+
+            //production - Cyneris
+
+            mechanicalHarvester, impulseHarvester, magneticHarvester, surgeHarvesterLarge, carbonScrubber, carbonConcentrator, aqueousExtractor, hydricExtractor, OsmoticExtractor,
 
             //storage
             coreApex, receptacle,
 
             //storage - erekir
 
+            //storage - cyneris
+            coreEcho, coreCodex, coreAnima, capsule,
+
             //turrets
             discharge, disrupt, hive,
 
-
-            //turrets - erekir
+            //turrets - Cyneris
+            bract, gale, reign,
 
             //units
+            repairSpire,
 
             //payloads
-            payloadConveyorLarge, payloadRouterLarge
+            payloadConveyorLarge, payloadRouterLarge,
 
+            //payloads - Cyneris
+            mechanicalPayloadConveyor, mechanicalPayloadConveyorLarge, mechanicalPayloadConveyorHuge,
+            mechanicalPayloadRouter, mechanicalPayloadRouterLarge, mechanicalPayloadRouterHuge,
+            mechanicalConstructor, mechanicalConstructorLarge, mechanicalConstructorHuge,
+            mechanicalDeconstructor, mechanicalDeconstructorLarge, mechanicalDeconstructorHuge,
+            mechanicalPayloadLoader, mechanicalPayloadLoaderLarge, mechanicalPayloadLoaderHuge,
+            mechanicalPayloadUnloader, mechanicalPayloadUnloaderLarge, mechanicalPayloadUnloaderHuge
 
             //logic
 
@@ -110,10 +138,247 @@ public class AepherasBlocks {
 
             ;
 
+    public static final Seq<Block> serpuloBlocks = new Seq<>(), erekirBlocks = new Seq<>(), cynerisBlocks = new Seq<>();
+
     public static void load(){
         for(int i = 1; i <= Vars.maxBlockSize; i++){
             new ConstructBlock(i);
         }
+
+        oreAluminum = new OreBlock("ore-aluminum", AepherasItems.aluminum);
+        oreFerrite = new OreBlock("ore-ferrite", AepherasItems.ferrite);
+        oreCobalt = new OreBlock("ore-cobalt", AepherasItems.cobalt);
+        oreChromium = new OreBlock("ore-chromium", AepherasItems.chromium);
+        oreSulfur = new OreBlock("ore-sulfur", AepherasItems.sulfur);
+        oreVanadium = new OreBlock("ore-vanadium", AepherasItems.vanadium);
+
+        rubyCluster = new CrystalBlock("ruby-cluster"){{
+            lightColor = Color.valueOf("f15454");
+            lightRadius = 100f;
+            alpha = 0.38f;
+            variants = 3;
+            clipSize = 128f;
+        }};
+
+        sapphireCluster = new CrystalBlock("sapphire-cluster"){{
+            lightColor = Color.valueOf("544deb");
+            lightRadius = 100f;
+            alpha = 0.38f;
+            variants = 3;
+            clipSize = 128f;
+        }};
+
+        amethystCluster = new CrystalBlock("amethyst-cluster"){{
+            lightColor = Color.valueOf("f08dd5");
+            lightRadius = 100f;
+            alpha = 0.38f;
+            variants = 3;
+            clipSize = 128f;
+        }};
+
+        emeraldCluster = new CrystalBlock("emerald-cluster"){{
+            lightColor = Color.valueOf("96f58c");
+            lightRadius = 100f;
+            alpha = 0.38f;
+            variants = 3;
+            clipSize = 128f;
+        }};
+
+        citrineCluster = new CrystalBlock("citrine-cluster"){{
+            lightColor = Color.valueOf("feb380");
+            lightRadius = 100f;
+            alpha = 0.38f;
+            variants = 3;
+            clipSize = 128f;
+        }};
+
+        quartzCluster = new CrystalBlock("quartz-cluster"){{
+            lightColor = Color.valueOf("ffffff");
+            lightRadius = 100f;
+            alpha = 0.38f;
+            variants = 3;
+            clipSize = 128f;
+        }};
+
+        roseQuartzCluster = new CrystalBlock("rose-quartz-cluster"){{
+            lightColor = Color.valueOf("ffcbdd");
+            lightRadius = 100f;
+            alpha = 0.38f;
+            variants = 3;
+            clipSize = 128f;
+        }};
+
+        rubyFloor = new Floor("ruby-floor"){{
+            emitLight = true;
+            lightColor = Color.valueOf("f15454").a(0.38f);
+            lightRadius = 25f;
+            cacheLayer = AepherasCacheLayers.crystal;
+        }};
+
+        sapphireFloor = new Floor("sapphire-floor"){{
+            emitLight = true;
+            lightColor = Color.valueOf("544deb").a(0.38f);
+            lightRadius = 25f;
+            cacheLayer = AepherasCacheLayers.crystal;
+        }};
+
+        amethystFloor = new Floor("amethyst-floor"){{
+            emitLight = true;
+            lightColor = Color.valueOf("f08dd5").a(0.38f);
+            lightRadius = 25f;
+            cacheLayer = AepherasCacheLayers.crystal;
+        }};
+
+        emeraldFloor = new Floor("emerald-floor"){{
+            emitLight = true;
+            lightColor = Color.valueOf("96f58c").a(0.38f);
+            lightRadius = 25f;
+            cacheLayer = AepherasCacheLayers.crystal;
+        }};
+
+        citrineFloor = new Floor("citrine-floor"){{
+            emitLight = true;
+            lightColor = Color.valueOf("feb380").a(0.38f);
+            lightRadius = 25f;
+            cacheLayer = AepherasCacheLayers.crystal;
+        }};
+
+        quartzFloor = new Floor("quartz-floor"){{
+            emitLight = true;
+            lightColor = Color.valueOf("ffffff").a(0.38f);
+            lightRadius = 25f;
+            cacheLayer = AepherasCacheLayers.crystal;
+        }};
+
+        roseQuartzFloor = new Floor("rose-quartz-floor"){{
+            emitLight = true;
+            lightColor = Color.valueOf("ffcbdd").a(0.38f);
+            lightRadius = 25f;
+            cacheLayer = AepherasCacheLayers.crystal;
+        }};
+
+        rubyWall = new StaticWall("ruby-wall"){{
+            rubyFloor.asFloor().wall = this;
+        }};
+
+        sapphireWall = new StaticWall("sapphire-wall"){{
+            sapphireFloor.asFloor().wall = this;
+        }};
+
+        amethystWall = new StaticWall("amethyst-wall"){{
+            rubyFloor.asFloor().wall = this;
+        }};
+
+        emeraldWall = new StaticWall("emerald-wall"){{
+            rubyFloor.asFloor().wall = this;
+        }};
+
+        citrineWall = new StaticWall("citrine-wall"){{
+            rubyFloor.asFloor().wall = this;
+        }};
+
+        quartzWall = new StaticWall("quartz-wall"){{
+            rubyFloor.asFloor().wall = this;
+        }};
+
+        roseQuartzWall = new StaticWall("rose-quartz-wall"){{
+            rubyFloor.asFloor().wall = this;
+        }};
+
+        scoria = new Floor("scoria"){{
+            attributes.set(Attribute.water, -0.25f);
+        }};
+
+        scoriaWall = new StaticWall("scoria-wall"){{
+            scoria.asFloor().wall = this;
+        }};
+
+        obsidian = new Floor("obsidian"){{
+            attributes.set(Attribute.water, -0.25f);
+            cacheLayer = AepherasCacheLayers.crystal;
+        }};
+
+        obsidianWall = new StaticWall("obsidian-wall"){{
+            obsidian.asFloor().wall = this;
+        }};
+
+        caveWater = new Floor("cave-water"){{
+            speedMultiplier = 0.5f;
+            variants = 0;
+            status = StatusEffects.wet;
+            statusDuration = 90f;
+            liquidDrop = Liquids.water;
+            isLiquid = true;
+            cacheLayer = CacheLayer.water;
+            albedo = 0.9f;
+            supportsOverlay = true;
+        }};
+
+        mycelium = new Floor("mycelium"){{
+            emitLight = true;
+            lightColor = Color.valueOf("679abb").a(0.1f);
+            lightRadius = 10f;
+        }};
+
+        myceliumWall = new StaticWall("mycelium-wall"){{
+            mycelium.asFloor().wall = this;
+            emitLight = true;
+            lightColor = Color.valueOf("679abb").a(0.1f);
+            lightRadius = 10f;
+        }};
+
+        mushroomFloor = new Floor("mushroom-floor"){{
+            emitLight = true;
+            lightColor = Color.valueOf("679abb").a(0.15f);
+            lightRadius = 15f;
+        }};
+
+        mushroomWall = new StaticWall("mushroom-wall"){{
+            mushroomFloor.asFloor().wall = this;
+            emitLight = true;
+            lightColor = Color.valueOf("679abb").a(0.15f);
+            lightRadius = 15f;
+        }};
+
+        glowingMushroom = new Prop("glowing-mushroom"){{
+            variants = 3;
+            breakSound = Sounds.plantBreak;
+            emitLight = true;
+            lightColor = Color.valueOf("679abb").a(0.25f);
+            lightRadius = 20f;
+        }};
+
+        glowingMushroomLarge = new TallMushroom("glowing-mushroom-large"){{
+            emitLight = true;
+            lightColor = Color.valueOf("679abb").a(0.5f);
+            lightRadius = 50f;
+            variants = 3;
+        }};
+
+        cauradine = new Floor("cauradine"){{
+            drownTime = 230f;
+            status = StatusEffects.melting;
+            statusDuration = 240f;
+            speedMultiplier = 0.19f;
+            variants = 0;
+            liquidDrop = Liquids.slag;
+            isLiquid = true;
+            cacheLayer = AepherasCacheLayers.cauradine;
+            attributes.set(Attribute.heat, 0.85f);
+
+            emitLight = true;
+            lightRadius = 40f;
+            lightColor = Color.red.cpy().a(0.25f);
+        }};
+
+        cauricStone = new Floor("cauric-stone"){{
+            emitLight = true;
+            lightColor = Color.red.cpy().a(0.1f);
+            lightRadius = 25f;
+            cacheLayer = AepherasCacheLayers.crystalDark;
+        }};
+
+        // crafting
 
         advancedPlastaniumCompressor = new GenericCrafter("advanced-plastanium-compressor"){{
             requirements(Category.crafting, with(Items.lead, 230, Items.graphite, 120, Items.titanium, 160, Items.silicon, 160, Items.plastanium, 90));
@@ -133,6 +398,21 @@ public class AepherasBlocks {
 
             outputItem = new ItemStack(Items.plastanium, 4);
 
+        }};
+
+        pyratiteCatalyzer = new GenericCrafter("pyratite-catalyzer"){{
+            requirements(Category.crafting, with(Items.copper, 125, Items.lead, 125, Items.plastanium, 40, Items.silicon, 50));
+            size = 3;
+            hasItems = hasLiquids = hasPower = true;
+            itemCapacity = 12;
+            liquidCapacity = 24;
+            craftTime = 80f;
+
+            consumePower(2f);
+            consumeItems(with(Items.coal, 6, Items.lead, 8, Items.sand, 8));
+            consumeLiquid(Liquids.water, 0.2f);
+
+            outputItem = new ItemStack(Items.pyratite, 6);
         }};
 
         blastCatalyzer = new GenericCrafter("blast-catalyzer"){{
@@ -431,7 +711,67 @@ public class AepherasBlocks {
             outputItem = new ItemStack(AepherasItems.titansteel, 8);
         }};
 
-        // walls
+        //crafting - Cyneris
+
+        carbyteCondensor = new GenericCrafter("carbyte-condensor"){{
+            requirements(Category.crafting, with(AepherasItems.aluminum, 30, AepherasItems.ferrite, 25));
+            size = 2;
+            hasItems = hasPower = hasLiquids = true;
+            itemCapacity = 10;
+            craftTime = 80;
+
+            craftEffect = Fx.pulverizeMedium;
+            drawer = new DrawMulti(new DrawDefault(), new DrawBlurSpin("-rotator", 1f), new DrawRegion("-top"));
+
+            consumePower(0.5f);
+            consumeLiquid(AepherasLiquids.carbonDioxide, 0.6f);
+
+            outputItem = new ItemStack(AepherasItems.carybte, 2);
+            outputLiquid = new LiquidStack(Liquids.ozone, 0.4f);
+
+            researchCostMultiplier = 0.11f;
+        }};
+
+        sapphireCrystallizer = new GenericCrafter("sapphire-crystallizer"){{
+            requirements(Category.crafting, with(AepherasItems.aluminum, 90, AepherasItems.ferrite, 75));
+            size = 3;
+            hasItems = hasPower = hasLiquids = true;
+            itemCapacity = 10;
+            craftTime = 30f;
+
+            ambientSound = Sounds.techloop;
+            ambientSoundVolume = 0.05f;
+
+            DrawPlasma sapphirePlasma = new DrawPlasma();
+            sapphirePlasma.plasma1 = sapphirePlasma.plasma2 = Color.white;
+            drawer = new DrawMulti(new DrawDefault(), new DrawLiquidRegion(Liquids.water), new DrawPlasma(), new DrawRegion("-top"));
+
+            consumePower(0.5f);
+            consumeItems(with(AepherasItems.aluminum, 1, AepherasItems.ferrite, 1));
+            consumeLiquid(Liquids.water, 0.2f);
+
+            outputItem = new ItemStack(AepherasItems.sapphire, 1);
+        }};
+
+        grapheneSynthesizer = new GenericCrafter("graphene-synthesizer"){{
+            requirements(Category.crafting, with(AepherasItems.aluminum, 40, AepherasItems.ferrite, 30));
+            size = 2;
+            hasItems = hasPower = true;
+            itemCapacity = 10;
+            craftTime = 40f;
+
+            ambientSound = Sounds.techloop;
+            ambientSoundVolume = 0.05f;
+
+            drawer = new DrawMulti(new DrawDefault(), new DrawGrapheneWeave("-weave1", "clockwise"), new DrawGrapheneWeave("-weave2", "counterclockwise"), new DrawRegion("-top"));
+
+            consumePower(1f);
+            consumeItem(AepherasItems.carybte, 2);
+
+            outputItem = new ItemStack(AepherasItems.graphene, 1);
+        }};
+
+        //walls
 
         copperWallHuge = new Wall("copper-wall-huge"){{
             requirements(Category.defense, with(Items.copper, 54));
@@ -667,6 +1007,16 @@ public class AepherasBlocks {
             consumePower(9f);
         }};
 
+        //defense - Erekir
+        radarLarge = new Radar("radar-large"){{
+            requirements(Category.effect, BuildVisibility.fogOnly, with(Items.silicon, 110, Items.thorium, 85, Items.oxide, 45));
+            size = 2;
+            outlineColor = Color.valueOf("4a4b53");
+            fogRadius = 75;
+
+            consumePower(2f);
+        }};
+
         //transportation
 
         titansteelConveyor = new StackConveyor("titansteel-conveyor"){{
@@ -676,10 +1026,95 @@ public class AepherasBlocks {
             itemCapacity = 25;
         }};
 
+        //transportation - Cyneris
+
+        pulseDriver = new MassDriver("pulse-driver"){{
+            requirements(Category.distribution, with(AepherasItems.aluminum, 10));
+            size = 1;
+            range = 80f;
+            itemCapacity = 15;
+            researchCostMultiplier = 0.11f;
+            hasPower = false;
+        }};
+
+        strataDriver = new MassDriver("strata-driver"){{
+            requirements(Category.distribution, with(AepherasItems.aluminum, 50, AepherasItems.ferrite, 40, AepherasItems.graphene, 30));
+            size = 2;
+            range = 200f;
+            itemCapacity = 50;
+            consumePower(1/3f);
+            researchCostMultiplier = 0.11f;
+        }};
+
+        primeDriver = new MassDriver("prime-driver"){{
+            requirements(Category.distribution, with( AepherasItems.ferrite, 130, AepherasItems.graphene, 80, AepherasItems.steel, 55));
+            size = 3;
+            range = 500f;
+            itemCapacity = 125;
+            consumePower(1f);
+            researchCostMultiplier = 0.11f;
+        }};
+
+        //liquid - Cyneris
+
+        insulatedConduit = new Conduit("insulated-conduit"){{
+            requirements(Category.liquid, with(AepherasItems.sapphire, 1, AepherasItems.aluminum, 1));
+            size = 1;
+            liquidCapacity = 20f;
+            health = 65;
+        }};
+
+        primeConduit = new Conduit("prime-conduit"){{
+            requirements(Category.liquid, with(AepherasItems.sapphire, 1, AepherasItems.cobalt, 2));
+            size = 1;
+            liquidCapacity = 40f;
+            liquidPressure = 1.025f;
+            health = 130;
+        }};
+
+        shieldedConduit = new ArmoredConduit("shielded-conduit"){{
+            requirements(Category.liquid, with(AepherasItems.steel, 2, AepherasItems.sapphire, 1, AepherasItems.chromium, 1));
+            size = 1;
+            liquidCapacity = 50f;
+            liquidPressure = 1.03f;
+            health = 300;
+        }};
+
+        insulatedLiquidRouter = new LiquidRouter("insulated-liquid-router"){{
+            requirements(Category.liquid, with(AepherasItems.sapphire, 2, AepherasItems.ferrite, 4));
+            size = 1;
+            liquidCapacity = 120f;
+            underBullets = true;
+            solid = false;
+        }};
+
+        liquidCapsule = new LiquidRouter("liquid-capsule"){{
+            requirements(Category.liquid, with(AepherasItems.sapphire, 15, AepherasItems.cobalt, 10));
+            size = 2;
+            liquidCapacity = 700f;
+            solid = true;
+        }};
+
+        liquidCell = new LiquidRouter("liquid-cell"){{
+            requirements(Category.liquid, with(AepherasItems.sapphire, 40, AepherasItems.cobalt, 30));
+            size = 3;
+            liquidCapacity = 1800;
+            solid = true;
+        }};
+
+        liquidReservoir = new LiquidRouter("liquid-reservoir"){{
+            requirements(Category.liquid, with(AepherasItems.sapphire, 75, AepherasItems.cobalt, 50));
+            size = 4;
+            liquidCapacity = 5500;
+            solid = true;
+        }};
+
+
         //power
 
         advancedPowerNode = new PowerNode("advanced-power-node"){{
             requirements(Category.power, with(Items.lead, 30, Items.titanium, 20, Items.silicon, 45, Items.surgeAlloy, 15, Items.phaseFabric, 20));
+            size = 2;
             health = 650;
             maxNodes = 25;
             laserRange = 40f;
@@ -726,6 +1161,41 @@ public class AepherasBlocks {
             explodeEffect = new MultiEffect(AepherasFx.venusReactorExplosion1, AepherasFx.venusReactorExplosion2, Fx.bigShockwave, Fx.scatheExplosion, Fx.sparkExplosion, Fx.explosion, Fx.titanExplosion);
         }};
 
+        linkNode = new CynerisPowerNode("link-node", Color.valueOf("4c7ee7")){{
+            requirements(Category.power, with(AepherasItems.aluminum, 2, AepherasItems.ferrite, 2));
+            maxNodes = 10;
+            laserRange = 6f;
+            laserColor2 = Color.valueOf("80a9ff");
+        }};
+
+        linkNodeLarge = new CynerisPowerNode("link-node-large", Color.valueOf("4c7ee7")){{
+            requirements(Category.power, with(AepherasItems.aluminum, 2, AepherasItems.ferrite, 2));
+            size = 2;
+            maxNodes = 15;
+            laserRange = 15f;
+            laserColor2 = Color.valueOf("80a9ff");
+        }};
+
+        impulseDrill = new Drill("impulse-drill"){{
+            requirements(Category.production, with(Items.copper, 285, Items.silicon, 230, Items.titanium, 200, Items.thorium, 175, Items.surgeAlloy, 35));
+            drillTime = 120;
+            size = 4;
+            drawRim = true;
+            hasPower = true;
+            tier = 5;
+            updateEffect = Fx.pulverizeRed;
+            updateEffectChance = 0.03f;
+            drillEffect = Fx.mineHuge;
+            rotateSpeed = 8f;
+            warmupSpeed = 0.01f;
+            itemCapacity = 40;
+
+            liquidBoostIntensity = 2.4f;
+
+            consumePower(7f);
+            consumeLiquid(Liquids.water, 0.1f).boost();
+        }};
+
         hydrator = new SolidPump("hydrator"){{
             requirements(Category.production, with(Items.metaglass, 120, Items.graphite, 80, Items.silicon, 60, Items.titanium, 75));
             size = 3;
@@ -758,7 +1228,23 @@ public class AepherasBlocks {
             outputItem = new ItemStack(Items.sporePod, 3);
         }};
 
-        // storage
+        //production - Cyneris
+
+        carbonScrubber = new GenericCrafter("carbon-scrubber"){{
+            requirements(Category.production, with(AepherasItems.aluminum, 30, AepherasItems.ferrite, 40));
+            size = 2;
+            hasLiquids = true;
+            liquidCapacity = 24f;
+            drawer = new DrawMulti(
+                    new DrawDefault(),
+                    new DrawBlurSpin("-rotator", 5),
+                    new DrawRegion("-top")
+            );
+            consumePower(0.5f);
+            outputLiquid = new LiquidStack(AepherasLiquids.carbonDioxide, 0.1f);
+        }};
+
+        //storage
 
         coreApex = new CoreBlock("core-apex"){{
             requirements(Category.effect, with(Items.copper, 12000, Items.lead, 12000, Items.silicon, 9000, Items.thorium, 8000, Items.metaglass, 8000, Items.plastanium, 7000));
@@ -775,6 +1261,45 @@ public class AepherasBlocks {
             scaledHealth = 55f;
             itemCapacity = 3000;
             size = 5;
+        }};
+
+        // storage - cyneris
+
+        coreEcho = new CoreBlock("core-echo"){{
+            requirements(Category.effect, BuildVisibility.editorOnly, with(AepherasItems.aluminum, 1000, AepherasItems.ferrite, 1000));
+            health = 1000;
+            size = 2;
+            alwaysUnlocked = isFirstTier = true;
+            unitCapModifier = 8;
+            itemCapacity = 5000;
+            unitType = AepherasUnitTypes.drift;
+        }};
+
+        coreCodex = new CoreBlock("core-codex"){{
+            requirements(Category.effect, BuildVisibility.shown, with(AepherasItems.aluminum, 4000, AepherasItems.ferrite, 4000, AepherasItems.graphene, 3000));
+            health = 3000;
+            size = 3;
+            unitCapModifier = 16;
+            itemCapacity = 10000;
+            researchCostMultiplier = 0.11f;
+            unitType = AepherasUnitTypes.veil;
+        }};
+
+        coreAnima = new CoreBlock("core-anima"){{
+            requirements(Category.effect, BuildVisibility.shown, with(AepherasItems.aluminum, 9000, AepherasItems.ferrite, 9000, AepherasItems.steel, 5000, AepherasItems.graphene, 6000));
+            health = 5000;
+            size = 4;
+            unitCapModifier = 24;
+            itemCapacity = 15000;
+            researchCostMultiplier = 0.11f;
+            unitType = AepherasUnitTypes.tempest;
+        }};
+
+        capsule = new StorageBlock("capsule"){{
+            requirements(Category.effect, with(AepherasItems.aluminum, 10));
+            scaledHealth = 55f;
+            itemCapacity = 25;
+            size = 1;
         }};
 
 
@@ -1101,6 +1626,182 @@ public class AepherasBlocks {
                     }}
             );
         }};
+        //turrets - Cyneris
+        bract = new ItemTurret("bract"){{
+            requirements(Category.turret, with(AepherasItems.aluminum, 30, AepherasItems.ferrite, 10));
+            ammo(
+                    AepherasItems.aluminum, new BasicBulletType(2.5f, 9){{
+                        width = 7f;
+                        height = 9f;
+                        lifetime = 60f;
+                        ammoMultiplier = 2;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        frontColor = AEPal.aluminumAmmoFront;
+                        backColor = AEPal.aluminumAmmoBack;
+                    }},
+                    AepherasItems.ferrite, new BasicBulletType(2f, 9){{
+                        width = 7f;
+                        height = 9f;
+                        lifetime = 75f;
+                        ammoMultiplier = 2;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        frontColor = AEPal.ferriteAmmoFront;
+                        backColor = AEPal.ferriteAmmoBack;
+                    }},
+                    AepherasItems.vanadium, new BasicBulletType(3f, 15){{
+                        width = 7f;
+                        height = 9f;
+                        lifetime = 50f;
+                        ammoMultiplier = 1;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        frontColor = AEPal.vanadiumAmmoFront;
+                        backColor = AEPal.vanadiumAmmoBack;
+                    }},
+                    AepherasItems.graphene, new BasicBulletType(2.5f, 9){{
+                        width = 6f;
+                        height = 8f;
+                        lifetime = 60f;
+                        ammoMultiplier = 4;
+                        reloadMultiplier = 2/3f;
+                        hitEffect = despawnEffect = Fx.hitBulletColor;
+                        frontColor = AEPal.grapheneAmmoFront;
+                        backColor = AEPal.grapheneAmmoBack;
+                        homingPower = 0.08f;
+                        homingRange = 50f;
+                    }}
+            );
+            recoil = 0.5f;
+            drawer = new DrawTurret(){{
+                parts.add(new RegionPart("-barrel"){{
+                    progress = PartProgress.recoil;
+                    recoilIndex = 0;
+                    under = true;
+                    moveY = -1.5f;
+                }});
+            }};
+            shootY = 3f;
+            reload = 20f;
+            range = 160;
+            shootCone = 15f;
+            ammoUseEffect = Fx.casing1;
+            health = 250;
+            inaccuracy = 2f;
+            rotateSpeed = 10f;
+            coolant = consumeCoolant(0.1f);
+            researchCostMultiplier = 0.05f;
+
+            limitRange(5f);
+        }};
+
+        gale = new ItemTurret("gale"){{
+            requirements(Category.turret, with(AepherasItems.aluminum, 75, AepherasItems.ferrite, 60));
+            ammo(
+                    AepherasItems.ferrite, new FlakBulletType(5f, 2){{
+                        lifetime = 48f;
+                        ammoMultiplier = 3f;
+                        shootEffect = Fx.shootSmall;
+                        width = 6f;
+                        height = 8f;
+                        hitEffect = Fx.blastExplosion;
+                        splashDamage = 10f;
+                        splashDamageRadius = 30f;
+
+                        frontColor = AEPal.ferriteAmmoFront;
+                        backColor = AEPal.ferriteAmmoBack;
+                        despawnEffect = Fx.hitBulletColor;
+
+                    }},
+                    AepherasItems.vanadium, new FlakBulletType(6f, 3){{
+                        lifetime = 40f;
+                        ammoMultiplier = 3f;
+                        shootEffect = Fx.shootSmall;
+                        width = 5f;
+                        height = 9f;
+                        hitEffect = Fx.blastExplosion;
+                        splashDamage = 15f;
+                        splashDamageRadius = 25f;
+
+                        frontColor = AEPal.vanadiumAmmoFront;
+                        backColor = AEPal.vanadiumAmmoBack;
+                        despawnEffect = Fx.hitBulletColor;
+
+                    }},
+                    AepherasItems.sapphire, new FlakBulletType(5f, 5){{
+                        lifetime = 48f;
+                        ammoMultiplier = 5f;
+                        shootEffect = Fx.shootSmall;
+                        width = 6.5f;
+                        height = 8.5f;
+                        hitEffect = Fx.blastExplosion;
+                        splashDamage = 20f;
+                        splashDamageRadius = 35f;
+
+                        frontColor = AEPal.sapphireAmmoFront;
+                        backColor = AEPal.sapphireAmmoBack;
+                        despawnEffect = Fx.hitBulletColor;
+
+                        fragBullets = 6;
+                        fragBullet = new BasicBulletType(3f, 1){{
+                            width = 5f;
+                            height = 12f;
+                            shrinkY = 1f;
+                            lifetime = 20f;
+                            backColor = trailColor = AEPal.sapphireAmmoBack;
+                            hitColor = frontColor = AEPal.sapphireAmmoFront;
+                            despawnEffect = Fx.none;
+                            collidesGround = false;
+                        }};
+
+                    }}
+            );
+            drawer = new DrawTurret(){{
+                for(int i = 0; i < 2; i ++){
+                    int f = i;
+                    parts.add(new RegionPart("-barrel-" + (i == 0 ? "l" : "r")){{
+                        progress = PartProgress.recoil;
+                        recoilIndex = f;
+                        under = false;
+                        moveY = -2.5f;
+                    }});
+                }
+            }};
+
+            reload = 9f;
+            range = 220f;
+            size = 2;
+            targetGround = false;
+
+            shoot = new ShootAlternate(12f);
+            shootY = 0f;
+            shoot.shotDelay = 5f;
+            shoot.shots = 4;
+
+            recoil = 1f;
+            rotateSpeed = 15f;
+            inaccuracy = 8f;
+            shootCone = 20f;
+
+            scaledHealth = 150;
+            shootSound = Sounds.shootSnap;
+            coolant = consumeCoolant(0.2f);
+            researchCostMultiplier = 0.05f;
+
+        }};
+
+        //units
+        repairSpire = new RepairTurret("repair-spire"){{
+            requirements(Category.units, with(Items.plastanium, 120, Items.silicon, 130, Items.thorium, 180, Items.surgeAlloy, 80, Items.phaseFabric, 35));
+            size = 3;
+            repairSpeed = 12f;
+            repairRadius = 200f;
+            length = 8.25f;
+            powerUse = 12f;
+            beamWidth = 1.5f;
+            pulseRadius = 8f;
+            coolantUse = 0.3f;
+            coolantMultiplier = 2.5f;
+            acceptCoolant = true;
+        }};
 
         // payloads
 
@@ -1117,6 +1818,56 @@ public class AepherasBlocks {
             payloadLimit = 5f;
             canOverdrive = false;
         }};
+
+        //payloads - Cyneris
+
+        mechanicalPayloadConveyor = new PayloadConveyor("mechanical-payload-conveyor"){{
+            requirements(Category.units, with(AepherasItems.aluminum, 1));
+            size = 1;
+            payloadLimit = 1;
+            moveTime = 20f;
+        }};
+
+        mechanicalPayloadConveyorLarge = new PayloadConveyor("mechanical-payload-conveyor-large"){{
+            requirements(Category.units, with(AepherasItems.aluminum, 10, AepherasItems.graphene, 5));
+            size = 2;
+            payloadLimit = 2;
+            moveTime = 20f;
+        }};
+
+        mechanicalPayloadConveyor = new PayloadConveyor("mechanical-payload-conveyor-huge"){{
+            requirements(Category.units, with(AepherasItems.aluminum, 15, AepherasItems.graphene, 10, AepherasItems.steel, 5));
+            size = 3;
+            payloadLimit = 3;
+            moveTime = 20f;
+        }};
+
+        mechanicalPayloadRouter = new PayloadRouter("mechanical-payload-router"){{
+            requirements(Category.units, with(AepherasItems.aluminum, 2));
+            size = 1;
+            payloadLimit = 1;
+            moveTime = 20f;
+        }};
+
+        mechanicalPayloadRouterLarge = new PayloadRouter("mechanical-payload-router-large"){{
+            requirements(Category.units, with(AepherasItems.aluminum, 12, AepherasItems.graphene, 10));
+            size = 2;
+            payloadLimit = 2;
+            moveTime = 20f;
+        }};
+
+        mechanicalPayloadRouterHuge = new PayloadRouter("mechanical-payload-router-huge"){{
+            requirements(Category.units, with(AepherasItems.aluminum, 18, AepherasItems.graphene, 15, AepherasItems.steel, 8));
+            size = 3;
+            payloadLimit = 3;
+            moveTime = 20f;
+        }};
+
+
+
+        serpuloBlocks.addAll(Blocks.duo, Blocks.scatter, Blocks.scorch, Blocks.hail, Blocks.wave, Blocks.lancer, Blocks.arc, Blocks.parallax, Blocks.swarmer, Blocks.salvo, Blocks.segment, Blocks.tsunami, Blocks.fuse, Blocks.cyclone, Blocks.foreshadow, Blocks.spectre, Blocks.ripple, Blocks.meltdown, Blocks.mechanicalDrill, Blocks.pneumaticDrill, Blocks.laserDrill, Blocks.blastDrill, Blocks.waterExtractor, Blocks.cultivator, Blocks.oilExtractor, Blocks.conveyor, Blocks.titaniumConveyor, Blocks.plastaniumConveyor, Blocks.armoredConveyor, Blocks.junction, Blocks.itemBridge, Blocks.phaseConduit, Blocks.sorter, Blocks.invertedSorter, Blocks.router, Blocks.distributor, Blocks.overflowDuct, Blocks.underflowGate, Blocks.massDriver, Blocks.mechanicalPump, Blocks.rotaryPump, Blocks.impulsePump, Blocks.conduit, Blocks.pulseConduit, Blocks.platedConduit, Blocks.liquidRouter, Blocks.liquidContainer, Blocks.liquidTank, Blocks.liquidJunction, Blocks.bridgeConduit, Blocks.phaseConduit, Blocks.powerNode, Blocks.powerNodeLarge, Blocks.surgeTower, Blocks.battery, Blocks.batteryLarge, Blocks.diode, Blocks.combustionGenerator, Blocks.thermalGenerator, Blocks.steamGenerator, Blocks.differentialGenerator, Blocks.rtgGenerator, Blocks.solarPanel, Blocks.largeSolarPanel, Blocks.thoriumReactor, Blocks.impactReactor, Blocks.copperWall, Blocks.copperWallLarge, Blocks.titaniumWall, Blocks.titaniumWallLarge, Blocks.plastaniumWall, Blocks.plastaniumWallLarge, Blocks.thoriumWall, Blocks.thoriumWallLarge, Blocks.phaseWall, Blocks.phaseWallLarge, Blocks.surgeWall, Blocks.surgeWallLarge, Blocks.scrapWall, Blocks.scrapWallLarge, Blocks.scrapWallHuge, Blocks.scrapWallGigantic, Blocks.door, Blocks.doorLarge, Blocks.thruster, Blocks.graphitePress, Blocks.multiPress, Blocks.siliconSmelter, Blocks.siliconCrucible, Blocks.kiln, Blocks.plastaniumCompressor, Blocks.phaseWeaver, Blocks.surgeSmelter, Blocks.cryofluidMixer, Blocks.pyratiteMixer, Blocks.blastMixer, Blocks.melter, Blocks.separator, Blocks.disassembler, Blocks.coalCentrifuge, Blocks.sporePress, Blocks.pulverizer, Blocks.incinerator, Blocks.groundFactory, Blocks.airFactory, Blocks.navalFactory, Blocks.additiveReconstructor, Blocks.multiplicativeReconstructor, Blocks.exponentialReconstructor, Blocks.tetrativeReconstructor, Blocks.payloadConveyor, Blocks.payloadRouter, Blocks.repairPoint, Blocks.repairTurret, Blocks.mender, Blocks.mendProjector, Blocks.overdriveProjector, Blocks.overdriveDome, Blocks.forceProjector, Blocks.coreShard, Blocks.coreFoundation, Blocks.coreNucleus, Blocks.launchPad, Blocks.interplanetaryAccelerator, Blocks.shockMine, Blocks.container, Blocks.vault, Blocks.unloader, Blocks.message, Blocks.switchBlock, Blocks.microProcessor, Blocks.logicProcessor, Blocks.hyperProcessor, Blocks.memoryBank, Blocks.memoryCell, Blocks.logicDisplay, Blocks.largeLogicDisplay, discharge, disrupt, hive, hydrator, mycoformer, titansteelConveyor, advancedPowerNode, voltaliteReactor, nuclearReactor, venusReactor, copperWallHuge, copperWallGigantic, titaniumWallHuge, titaniumWallGigantic, plastaniumWallHuge, plastaniumWallGigantic, thoriumWallHuge, thoriumWallGigantic, phaseWallHuge, phaseWallGigantic, surgeWallHuge, surgeWallGigantic, forceWall,forceWallLarge, forceWallHuge, forceWallGigantic, titansteelWall, titansteelWallLarge, titansteelWallHuge, titaniumWallGigantic, advancedPlastaniumCompressor, pyratiteCatalyzer, blastCatalyzer, voltaliteMixer, nuclearMixer, voltaliteCatalyzer, nuclearCatalyzer, cokingOven, cokingBlaster, cryofluidCatalyzer, graphiteBlaster, siliconKiln, metaglassCrucible, metaglassBlaster, multiCentrifuge, phaseLoom, sifter, sporeMultipress, surgeSmeltery, titanSmelter, titanCrucible, payloadConveyorLarge, payloadRouterLarge, mendDome, overdriver, mendArray, forceDome, overdriveArray, coreApex, receptacle);
+        erekirBlocks.addAll(Blocks.breach, Blocks.diffuse, Blocks.sublimate, Blocks.titan, Blocks.disperse, Blocks.afflict, Blocks.lustre, Blocks.scathe, Blocks.malign, Blocks.ventCondenser, Blocks.cliffCrusher, Blocks.plasmaBore, Blocks.largePlasmaBore, Blocks.impactDrill, Blocks.eruptionDrill, Blocks.duct, Blocks.ductBridge, Blocks.ductRouter, Blocks.ductUnloader, Blocks.armoredDuct, Blocks.overflowDuct, Blocks.underflowDuct, Blocks.surgeConveyor, Blocks.surgeRouter, Blocks.unitCargoLoader, Blocks.unitCargoUnloadPoint, Blocks.reinforcedPump, Blocks.reinforcedConduit, Blocks.reinforcedLiquidRouter, Blocks.reinforcedBridgeConduit, Blocks.reinforcedLiquidRouter, Blocks.reinforcedLiquidTank, Blocks.reinforcedLiquidContainer, Blocks.beamNode, Blocks.beamLink, Blocks.beamTower, Blocks.turbineCondenser, Blocks.chemicalCombustionChamber, Blocks.pyrolysisGenerator, Blocks.fluxReactor, Blocks.neoplasiaReactor, Blocks.berylliumWall, Blocks.berylliumWallLarge, Blocks.tungstenWall, Blocks.tungstenWallLarge, Blocks.blastDoor, Blocks.carbideWallLarge, Blocks.carbideWall, Blocks.shieldedWall, Blocks.reinforcedSurgeWall, Blocks.reinforcedSurgeWallLarge, Blocks.siliconArcFurnace, Blocks.electrolyzer, Blocks.atmosphericConcentrator, Blocks.oxidationChamber, Blocks.electricHeater, Blocks.slagHeater, Blocks.phaseHeater, Blocks.heatRedirector, Blocks.heatRouter, Blocks.slagIncinerator, Blocks.carbideCrucible, Blocks.surgeCrucible, Blocks.cyanogenSynthesizer, Blocks.phaseSynthesizer, Blocks.heatSource, Blocks.tankAssembler, Blocks.shipAssembler, Blocks.mechAssembler, Blocks.tankFabricator, Blocks.shipFabricator, Blocks.mechFabricator, Blocks.basicAssemblerModule, Blocks.unitRepairTower, Blocks.reinforcedPayloadConveyor, Blocks.reinforcedPayloadRouter, Blocks.payloadMassDriver, Blocks.largePayloadMassDriver, Blocks.deconstructor, Blocks.smallDeconstructor, Blocks.constructor, Blocks.largeConstructor, Blocks.payloadLoader, Blocks.payloadUnloader, Blocks.radar, radarLarge, Blocks.buildTower, Blocks.regenProjector, Blocks.shockwaveTower, Blocks.shieldProjector, Blocks.shieldBreaker, Blocks.largeShieldProjector, Blocks.coreBastion, Blocks.coreCitadel, Blocks.coreAcropolis, Blocks.reinforcedContainer, Blocks.reinforcedVault, Blocks.canvas, Blocks.reinforcedMessage, Blocks.worldCell, Blocks.worldProcessor, Blocks.worldMessage, Blocks.beamLink, Blocks.heatSource, Blocks.shieldProjector, Blocks.largeShieldProjector);
+        cynerisBlocks.addAll(carbonScrubber, strataDriver, primeDriver, insulatedConduit, insulatedLiquidRouter, insulatedLiquidJunction, insulatedLiquidBridge, primeConduit, shieldedConduit, linkNode, linkNodeLarge, carbyteCondensor, sapphireCrystallizer, grapheneSynthesizer, coreCodex, coreAnima, mechanicalPayloadConveyor, mechanicalPayloadConveyorLarge, mechanicalPayloadConveyorHuge, mechanicalPayloadRouter, mechanicalPayloadRouterLarge, mechanicalPayloadConveyorHuge, mechanicalConstructor, mechanicalConstructorLarge, mechanicalConstructorHuge, mechanicalDeconstructor, mechanicalDeconstructorLarge, mechanicalDeconstructorHuge);
     }
 
 
