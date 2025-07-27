@@ -1,7 +1,7 @@
 package aepherasadditions;
 
 import aepherasadditions.content.*;
-import aepherasadditions.maps.planets.CynerisPresets;
+import aepherasadditions.content.custom.planets.CynerisPresets;
 import arc.*;
 import arc.graphics.gl.Shader;
 import arc.util.*;
@@ -31,21 +31,22 @@ public class AepherasAdditions extends Mod{
 
     @Override
     public void loadContent() {
-        AepherasShaders.load();
-        AepherasCacheLayers.load();
-        AepherasItems.load();
-        AepherasLiquids.load();
-        AepherasUnitTypes.load();
-        AepherasEffects.load();
-        AepherasBlocks.load();
+        ASounds.load();
+        AShaders.load();
+        ACacheLayers.load();
+        AItems.load();
+        ALiquids.load();
+        AUnitTypes.load();
+        AEffects.load();
+        ABlocks.load();
         try {
-            AepherasPlanets.load();
+            APlanets.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         CynerisTechTree.load();
         CynerisPresets.load();
-        SerpuloPlusTechTree.load();
+        ASerpuloTechTree.load();
 
     }
 }
